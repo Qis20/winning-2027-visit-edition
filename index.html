@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winning 2027 Event Factsheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════
+     DESIGN TOKENS — LIGHT MODE
+  ═══════════════════════════════════════════════════ */
+  :root {
+    --brand:         #fcc419;
+    --brand-dark:    #22487c;
+    --brand-darker:  #22487c;
+    --brand-light:   #ffe69c;
+    --brand-xlight:  #fff9db;
+    --highlight:     #fcc419;
+    --on-brand:      #1b2533;
+    --navy:          #22487c;
+
+    --bg:            #f4f6f9;
+    --surface:       #ffffff;
+    --surface-alt:   #eff2f6;
+    --border:        #dde3eb;
+    --border-soft:   #eaeef3;
+
+    --text:          #1b2533;
+    --text-mid:      #2f3846;
+    --text-light:    #5b6474;
+
+    --dark-bg:       #1c3d6b;
+
+    --shadow:        0 2px 16px rgba(20,32,47,.08);
+    --shadow-md:     0 6px 28px rgba(20,32,47,.14);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     DESIGN TOKENS — DARK MODE
+  ═══════════════════════════════════════════════════ */
+  [data-theme="dark"] {
+    --brand:         #fcc419;
+    --brand-dark:    #ffd43b;
+    --brand-darker:  #ffd43b;
+    --brand-light:   #4a3f10;
+    --brand-xlight:  #2a2610;
+
+    --bg:            #1b2d4a;
+    --surface:       #233a5e;
+    --surface-alt:   #2a446b;
+    --border:        #3b5a88;
+    --border-soft:   #31496f;
+
+    --text:          #eef1f6;
+    --text-mid:      #b7c0cd;
+    --text-light:    #9aa7bd;
+
+    --dark-bg:       #172a47;
+
+    --shadow:        0 2px 16px rgba(0,0,0,.35);
+    --shadow-md:     0 6px 28px rgba(0,0,0,.45);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+      --brand:         #fcc419;
+      --brand-dark:    #ffd43b;
+      --brand-darker:  #ffd43b;
+      --brand-light:   #4a3f10;
+      --brand-xlight:  #2a2610;
+      --bg:            #1b2d4a;
+      --surface:       #233a5e;
+      --surface-alt:   #2a446b;
+      --border:        #3b5a88;
+      --border-soft:   #31496f;
+      --text:          #eef1f6;
+      --text-mid:      #b7c0cd;
+      --text-light:    #9aa7bd;
+      --dark-bg:       #172a47;
+      --shadow:        0 2px 16px rgba(0,0,0,.35);
+      --shadow-md:     0 6px 28px rgba(0,0,0,.45);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     RESET & BASE
+  ═══════════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    transition: background .25s, color .25s;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     THEME TOGGLE — segmented Dark / Light switch
+  ═══════════════════════════════════════════════════ */
+  #theme-switch {
+    position: fixed;
+    top: 18px; right: 18px; z-index: 999;
+    display: flex; gap: 2px;
+    background: rgba(255,255,255,.9);
+    border-radius: 30px; padding: 4px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.18);
+    backdrop-filter: blur(8px);
+  }
+  [data-theme="dark"] #theme-switch { background: rgba(35,58,94,.9); }
+  .theme-opt {
+    display: flex; align-items: center; gap: 5px;
+    border: none; background: none; cursor: pointer;
+    font-family: 'Poppins', sans-serif; font-size: calc(.76rem + 1px); font-weight: 700;
+    letter-spacing: .5px; text-transform: uppercase;
+    padding: 8px 13px; border-radius: 24px;
+    color: #8a8f99; transition: background .2s, color .2s;
+  }
+  [data-theme="dark"] .theme-opt { color: #7c8aa0; }
+  .theme-opt.active {
+    background: var(--navy); color: #ffd43b;
+  }
+  .theme-opt:hover:not(.active) { color: #4a4f58; }
+  [data-theme="dark"] .theme-opt:hover:not(.active) { color: #c9d2e0; }
+
+  /* ═══════════════════════════════════════════════════
+     BACK TO TOP BUTTON
+  ═══════════════════════════════════════════════════ */
+  #back-to-top {
+    position: fixed;
+    bottom: 24px; right: 18px; z-index: 998;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--brand);
+    color: var(--on-brand);
+    border: none;
+    cursor: pointer; font-size: calc(1.2rem + 1px); font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 18px rgba(252,196,25,.45);
+    opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: opacity .25s, transform .25s, visibility .25s, box-shadow .2s;
+  }
+  #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+  #back-to-top:hover { box-shadow: 0 6px 24px rgba(252,196,25,.6); transform: translateY(-2px); }
+
+  /* ═══════════════════════════════════════════════════
+     HEADER
+  ═══════════════════════════════════════════════════ */
+  .header {
+    background: #1d4a85;
+    color: #fff;
+    text-align: center;
+    padding: 44px 24px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      none;
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--highlight);
+  }
+  .header-inner {
+    position: relative; z-index: 1;
+    max-width: 780px; margin: 0 auto;
+  }
+  .event-badge {
+    display: inline-block;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-size: calc(.8rem + 1px); font-weight: 800; letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 7px 22px; border-radius: 30px; margin-bottom: 8px;
+  }
+  .event-logo {
+    width: clamp(270px, 72vw, 420px); height: clamp(270px, 72vw, 420px);
+    display: block; margin: 0 auto -22px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,.25));
+  }
+  .event-name {
+    font-size: calc(clamp(2.1rem, 6.5vw, 3.5rem) + 1px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -.5px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .event-name span { color: var(--highlight); }
+  .tagline {
+    font-size: calc(clamp(.9rem, 2.1vw, 1.1rem) + 1px);
+    font-weight: 600; font-style: italic; letter-spacing: 1px;
+    color: rgba(255,255,255,.95); margin-bottom: 14px;
+    max-width: 620px; margin-left: auto; margin-right: auto;
+  }
+  .header-rule {
+    width: 64px; height: 3px;
+    background: var(--highlight); margin: 0 auto 26px; border-radius: 2px;
+  }
+  .header-meta {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+  }
+  .meta-pill {
+    display: flex; align-items: center; gap: 7px;
+    font-size: calc(.9rem + 1px); color: rgba(255,255,255,.92);
+    background: rgba(255,255,255,.1); border: 1.5px solid var(--highlight);
+    border-radius: 50px; padding: 7px 16px;
+  }
+  .meta-pill strong { color: #fff; font-weight: 700; }
+  @media (max-width: 420px) {
+    .meta-pill { white-space: nowrap; padding: 7px 12px; gap: 5px; font-size: calc(.82rem + 1px); }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     COUNTDOWN — dark boxed digit-tile style (fixed dark in both themes)
+  ═══════════════════════════════════════════════════ */
+  .countdown-wrap {
+    background: #0e1d36;
+    padding: 34px 24px 38px; text-align: center;
+  }
+  .countdown-label {
+    font-size: calc(.85rem + 1px); font-weight: 800;
+    letter-spacing: 3.5px; text-transform: uppercase;
+    color: #fcc419; margin-bottom: 20px;
+  }
+  .countdown-boxes { display: flex; justify-content: center; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .cd-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .cd-tiles { display: flex; gap: 5px; }
+  .cd-digit {
+    display: flex; align-items: center; justify-content: center;
+    width: clamp(36px, 8vw, 58px); height: clamp(48px, 10.5vw, 74px);
+    background: #1f3b66;
+    border: 1px solid #2e5185;
+    border-bottom: 3px solid #fcc419;
+    border-radius: 10px;
+    font-size: calc(clamp(1.5rem, 5vw, 2.5rem) + 1px); font-weight: 800;
+    color: #ffffff; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-colon {
+    align-self: center;
+    margin-top: -24px;
+    font-size: calc(1.8rem + 1px); font-weight: 800;
+    color: #fcc419;
+  }
+  .cd-unit-label {
+    font-size: calc(.8rem + 1px); font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,.85);
+  }
+
+  @media (max-width: 420px) {
+    .countdown-wrap { padding: 28px 10px 32px; }
+    .countdown-boxes { gap: 5px; }
+    .cd-tiles { gap: 3px; }
+    .cd-digit { width: clamp(28px, 8vw, 58px); height: clamp(40px, 11vw, 74px); font-size: calc(clamp(1.25rem, 5.5vw, 2.5rem) + 1px); }
+    .cd-colon { font-size: calc(1.2rem + 1px); margin-top: -20px; }
+    .cd-unit-label { font-size: calc(.62rem + 1px); letter-spacing: 1.4px; }
+  }
+  .countdown-done {
+    font-size: calc(1.15rem + 1px); font-weight: 700; color: #ffffff;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     PAGE LAYOUT — SIDEBAR + MAIN
+  ═══════════════════════════════════════════════════ */
+  .layout {
+    max-width: 1080px; margin: 0 auto;
+    padding: 32px 18px 56px;
+    display: flex; align-items: stretch; gap: 28px;
+  }
+
+  .sidebar {
+    flex: 0 0 340px;
+  }
+  .sidebar-inner {
+    position: sticky;
+    top: 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .sidebar-card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .sidebar-title {
+    font-size: calc(.8rem + 1px); font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--brand-darker);
+    padding: 4px 10px 12px;
+  }
+  .sidebar-nav {
+    padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .sidebar-nav-links {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .sidebar-link {
+    display: flex; align-items: center; gap: 10px;
+    font-size: calc(.92rem + 1px); font-weight: 600; color: var(--text);
+    text-decoration: none; padding: 10px 10px;
+    border-radius: 10px;
+    transition: background .15s, color .15s;
+  }
+  .sidebar-link:hover { background: var(--surface-alt); color: var(--text); }
+  .sidebar-link.active {
+    background: #2f5d9e;
+    color: #fff;
+    font-weight: 700;
+  }
+  @media (min-width: 901px) { [data-theme="dark"] .sidebar-link.active { background: #3a6db3; } }
+  .sidebar-icon { flex-shrink: 0; font-size: calc(1rem + 1px); }
+  .sidebar-bar {
+    flex-shrink: 0;
+    width: 3px; height: 18px;
+    border-radius: 2px;
+    background: transparent;
+    transition: background .15s;
+  }
+  .sidebar-link.active .sidebar-bar { background: var(--brand); }
+
+  .sidebar-meta {
+    display: flex; flex-direction: row; align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px 18px;
+  }
+  /* Logo files are cropped tight to the artwork, so it fills its box and sits centred */
+  .sm-logo { width: 136px; height: auto; align-self: center; flex-shrink: 0; }
+  @media (max-width: 900px) { .sm-logo { width: 150px; } }
+  .sm-divider { width: 2px; align-self: stretch; background: var(--brand); border-radius: 1px; flex-shrink: 0; }
+  .sm-col { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+  .sm-date { font-size: calc(1.08rem + 1px); font-weight: 800; color: var(--brand-darker); line-height: 1.3; }
+  .sm-days { font-size: calc(.82rem + 1px); font-weight: 600; color: var(--text-mid); }
+  .sm-times { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+  .sm-time {
+    color: var(--text);
+    font-weight: 800;
+    font-size: calc(.86rem + 1px);
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  .sm-time span {
+    display: block;
+    font-size: calc(.75rem + 1px); font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--text-light);
+  }
+
+  .sidebar-info {
+    background: var(--surface);
+    border-radius: 16px; padding: 16px 16px 17px;
+    box-shadow: var(--shadow);
+  }
+  .sidebar-cd-label {
+    font-size: calc(.76rem + 1px); font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--brand-darker);
+    margin-bottom: 12px; text-align: center;
+  }
+  .sidebar-cd-grid { display: flex; justify-content: space-between; gap: 7px; }
+  .mcd-group { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .mcd-tiles { display: flex; gap: 3px; }
+  /* Same look as the hero countdown: navy tile, white digit, yellow underline */
+  .mcd-digit {
+    width: 30px; height: 40px;
+    background: #2f5d9e;
+    border-bottom: 3px solid var(--highlight);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: calc(1.2rem + 1px); font-weight: 800; color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+  [data-theme="dark"] .mcd-digit { background: #3a6db3; }
+  .mcd-label {
+    font-size: calc(.75rem + 1px); font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-mid);
+  }
+  .sidebar-countdown-mini .countdown-done {
+    font-size: calc(.78rem + 1px); color: var(--brand-dark); text-align: center; line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    /* Move off the top-right so it doesn't collide with the docked mobile nav bar */
+    #theme-switch { top: auto; bottom: 18px; left: 18px; right: auto; }
+
+    .layout { flex-direction: column; }
+    .sidebar {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+    .sidebar-inner {
+      position: static;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Horizontal scrollable pill nav, docked to the top via JS (.is-docked) once scrolled past */
+    .sidebar-nav {
+      flex-direction: row; align-items: center; flex-wrap: nowrap;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--brand-xlight);
+      border-bottom: 2px solid var(--brand);
+      box-shadow: var(--shadow-md);
+    }
+    .sidebar-nav.is-docked {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      border-radius: 0;
+      margin: 0;
+    }
+    .sidebar-nav-spacer { display: block; width: 100%; }
+    .sidebar-title {
+      display: flex; align-items: center; gap: 10px;
+      flex: 0 0 auto;
+      padding: 0; margin: 0;
+      color: var(--brand-dark);
+    }
+    .sidebar-title::after {
+      content: ''; display: block;
+      width: 1px; height: 18px;
+      background: var(--brand);
+      opacity: .4;
+    }
+    .sidebar-nav-links {
+      flex-direction: row; flex-wrap: nowrap;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 8px;
+    }
+    .sidebar-nav-links::-webkit-scrollbar { display: none; }
+    .sidebar-link {
+      flex: 0 0 auto;
+      justify-content: center; text-align: center;
+      white-space: nowrap;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+    }
+    .sidebar-link .sidebar-bar { display: none; }
+    .sidebar-link.active {
+      background: var(--brand);
+      color: var(--on-brand);
+      border-color: var(--brand);
+    }
+  }
+
+  .main {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     ACCORDION
+  ═══════════════════════════════════════════════════ */
+  .acc-item {
+    background: var(--surface); border-radius: 16px;
+    box-shadow: var(--shadow); overflow: hidden; transition: box-shadow .2s;
+    scroll-margin-top: 24px;
+  }
+  @media (max-width: 900px) { .acc-item { scroll-margin-top: 76px; } }
+  .acc-item.is-open { box-shadow: var(--shadow-md); }
+
+  .acc-toggle {
+    width: 100%; display: flex; align-items: center; gap: 14px;
+    padding: 22px 24px; background: none; border: none;
+    cursor: pointer; color: inherit; transition: background .15s;
+    font-family: 'Poppins', sans-serif; text-align: left;
+  }
+  .acc-toggle:hover { background: var(--surface-alt); }
+  .acc-item.is-open .acc-toggle { border-bottom: 2px solid var(--border); }
+
+  .acc-bar {
+    flex-shrink: 0;
+    width: 3px; height: 22px;
+    border-radius: 2px;
+    background: var(--brand);
+  }
+
+  .sec-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--brand-xlight);
+    display: flex; align-items: center; justify-content: center;
+    font-size: calc(1.2rem + 1px); flex-shrink: 0;
+  }
+  .sec-title {
+    flex: 1; text-align: left;
+    font-size: calc(1.08rem + 1px); font-weight: 700; letter-spacing: -.2px;
+  }
+  .acc-chevron {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--surface-alt);
+    display: flex; align-items: center; justify-content: center;
+    font-size: calc(.75rem + 1px); flex-shrink: 0;
+    transition: transform .3s ease, background .2s;
+  }
+  .acc-item.is-open .acc-chevron {
+    transform: rotate(180deg);
+    background: #e3eaf3; color: #22487c;
+  }
+  [data-theme="dark"] .acc-item.is-open .acc-chevron { background: #2f5488; color: #e3eaf3; }
+
+  .acc-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .38s cubic-bezier(.4,0,.2,1);
+  }
+  .acc-content { padding: 28px 28px 32px; }
+
+  @media (max-width: 600px) {
+    .acc-toggle { padding: 18px 18px; }
+    .acc-content { padding: 20px 18px 24px; }
+    .sec-title { font-size: calc(1rem + 1px); }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     INFO ROWS
+  ═══════════════════════════════════════════════════ */
+  .info-row {
+    display: flex; gap: 16px; padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .ilabel {
+    flex-shrink: 0; width: 130px;
+    font-size: calc(1.05rem + 1px); font-weight: 700; letter-spacing: .3px;
+    color: var(--text); padding-top: 2px; text-transform: uppercase;
+  }
+  .ivalue { flex: 1; font-size: calc(1rem + 1px); line-height: 1.7; color: var(--text-mid); }
+  .ivalue strong { color: var(--text); font-weight: 600; }
+  .inote { font-size: calc(.86rem + 1px); color: var(--text-light); font-style: italic; margin-top: 4px; }
+  @media (max-width: 500px) {
+    .info-row { flex-direction: column; gap: 4px; }
+    .ilabel { width: auto; padding-top: 0; }
+  }
+
+  /* Per-day schedule inside the Time row */
+  .day-times { display: flex; flex-direction: column; gap: 10px; }
+  .day-time {
+    background: var(--surface-alt); border-radius: 10px;
+    padding: 11px 15px; font-size: calc(.97rem + 1px); line-height: 1.65;
+  }
+  .day-time .day-label {
+    display: block;
+    font-size: calc(.76rem + 1px); font-weight: 700; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--brand-dark);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     MAP BUTTONS
+  ═══════════════════════════════════════════════════ */
+  .map-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px; border-radius: 50px;
+    font-size: calc(.9rem + 1px); font-weight: 600; text-decoration: none;
+    transition: transform .15s, box-shadow .15s; cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-solid {
+    background: var(--surface-alt); color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-primary {
+    background: var(--brand); color: var(--on-brand);
+    border: 1.5px solid var(--brand-dark); font-weight: 700;
+  }
+  @keyframes btn-breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(252,196,25,.35); }
+    50% { transform: scale(1.045); box-shadow: 0 6px 22px rgba(252,196,25,.55); }
+  }
+  .btn-pulse { animation: btn-breathe 2.2s ease-in-out infinite; }
+  .btn-pulse:hover { animation-play-state: paused; }
+
+  /* ═══════════════════════════════════════════════════
+     SUBSECTIONS
+  ═══════════════════════════════════════════════════ */
+  .subsec {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .subsec:first-child { padding-top: 0; }
+  .subsec:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .subsec-title {
+    font-size: calc(1.02rem + 1px); font-weight: 700; letter-spacing: -.1px;
+    margin-bottom: 14px; padding-left: 14px; position: relative;
+  }
+  .subsec-title::before {
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 4px; height: 80%; background: var(--brand); border-radius: 2px;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     PARKING GRID
+  ═══════════════════════════════════════════════════ */
+  .park-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .park-grid { grid-template-columns: 1fr; } }
+
+  .park-card { border: 2px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .park-head {
+    background: var(--surface-alt); padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .park-opt {
+    font-size: calc(.75rem + 1px); font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-light); margin-bottom: 3px;
+  }
+  .park-name { font-size: calc(.95rem + 1px); font-weight: 700; }
+  .park-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 18px; }
+  .park-detail { display: flex; flex-direction: column; gap: 4px; }
+  .park-dlabel {
+    font-size: calc(.92rem + 1px); font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--text-mid);
+  }
+  .park-dval { font-size: calc(.93rem + 1px); line-height: 1.6; color: var(--text-mid); }
+  .park-dval strong { color: var(--text); }
+  .park-img {
+    width: 100%; height: auto; max-height: 200px; object-fit: cover;
+    border-radius: 8px; display: block; margin-top: 6px;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     VENUE PHOTO
+  ═══════════════════════════════════════════════════ */
+  .photo-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 14px; }
+  .venue-photo {
+    width: 100%; border-radius: 12px;
+    max-height: 300px; object-fit: cover;
+    border: 2px solid var(--border);
+  }
+  .photo-caption {
+    font-size: calc(.86rem + 1px); color: var(--text-light);
+    font-style: italic; text-align: center; margin-top: 7px;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     LOBBY BOX
+  ═══════════════════════════════════════════════════ */
+  .lobby-box {
+    background: var(--surface-alt);
+    border-radius: 10px; padding: 16px 18px;
+    font-size: calc(.98rem + 1px); line-height: 1.75; color: var(--text);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     RATES
+  ═══════════════════════════════════════════════════ */
+  .park-rates { margin-top: 4px; }
+  .rate-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 5px 0; border-bottom: 1px solid var(--border-soft);
+    font-size: calc(.93rem + 1px); line-height: 1.55; color: var(--text-mid);
+  }
+  .rate-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .rate-row strong { color: var(--text); }
+  .rate-dot { color: var(--brand-dark); font-size: calc(1rem + 1px); flex-shrink: 0; line-height: 1.55; font-weight: 900; }
+
+  /* ═══════════════════════════════════════════════════
+     CHECKLIST
+  ═══════════════════════════════════════════════════ */
+  .hw-box { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+  .hw-item {
+    display: flex; gap: 12px; align-items: center;
+    background: var(--surface-alt); border-radius: 10px;
+    padding: 12px 15px; font-size: calc(.97rem + 1px); color: var(--text-mid);
+  }
+  .hw-item .icon { flex-shrink: 0; font-size: calc(1.15rem + 1px); line-height: 1; }
+  .hw-item .body { flex: 1; line-height: 1.6; }
+  .hw-item .body strong { color: var(--text); }
+  .prep-intro { font-size: calc(.97rem + 1px); color: var(--text-mid); line-height: 1.6; margin-top: -4px; }
+  .prep-note {
+    display: flex; gap: 10px; align-items: flex-start; margin-top: 14px;
+    border: 1px dashed var(--brand); border-radius: 10px; padding: 12px 14px;
+    font-size: calc(.94rem + 1px); line-height: 1.65; color: var(--text-mid);
+  }
+  .prep-note strong { color: var(--text); }
+  .prep-note .icon { flex-shrink: 0; line-height: 1.6; }
+
+  .onboard-box {
+    background: var(--surface-alt);
+    border-radius: 12px; padding: 18px 20px;
+  }
+  .onboard-box p { font-size: calc(.97rem + 1px); color: var(--text-mid); line-height: 1.7; margin-bottom: 22px; }
+
+  /* ═══════════════════════════════════════════════════
+     AGENDA
+  ═══════════════════════════════════════════════════ */
+  .agenda-day {
+    border: 2px solid var(--border); border-radius: 14px;
+    overflow: hidden; margin-bottom: 12px;
+  }
+  .agenda-day:last-child { margin-bottom: 0; }
+  .agenda-head {
+    background: var(--surface-alt); padding: 13px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .agenda-day-label {
+    font-size: calc(.76rem + 1px); font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--brand-dark);
+  }
+  .agenda-date { font-size: calc(.95rem + 1px); font-weight: 700; }
+  .agenda-body { padding: 14px 18px; font-size: calc(.9rem + 1px); color: var(--text-light); font-style: italic; }
+
+  /* Day timeline: dot + connecting line, optional time on the left */
+  .agenda-list { list-style: none; padding: 16px 18px 18px; }
+  .agenda-step {
+    position: relative;
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 0 0 14px 22px;
+    font-size: calc(.98rem + 1px); line-height: 1.6; color: var(--text-mid);
+  }
+  .agenda-step:last-child { padding-bottom: 0; }
+  .agenda-step::before {
+    content: ''; position: absolute; left: 0; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--brand); box-shadow: 0 0 0 3px var(--brand-xlight);
+  }
+  .agenda-step::after {
+    content: ''; position: absolute; left: 4px; top: 20px; bottom: 2px;
+    width: 2px; background: var(--border);
+  }
+  .agenda-step:last-child::after { display: none; }
+  .agenda-time {
+    flex-shrink: 0; min-width: 62px;
+    font-weight: 700; color: var(--brand-dark); font-size: calc(.9rem + 1px);
+  }
+  .agenda-step strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════════════════════════════════════════════
+     DRESS CODE
+  ═══════════════════════════════════════════════════ */
+  .dress-badge {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 20px; border-radius: 12px;
+    font-size: calc(.98rem + 1px); font-weight: 500;
+    background: var(--surface-alt); color: var(--text);
+  }
+  .dress-badge .dress-icon { font-size: calc(1.5rem + 1px); flex-shrink: 0; margin-top: 2px; }
+
+  /* ═══════════════════════════════════════════════════
+     FAQ
+  ═══════════════════════════════════════════════════ */
+  .faq-item {
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .faq-item:last-child { margin-bottom: 0; }
+  .faq-q {
+    background: var(--surface-alt);
+    padding: 15px 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+    font-weight: 700; font-size: calc(1.02rem + 1px); line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-a {
+    padding: 14px 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+    color: var(--text-mid); font-size: calc(.98rem + 1px); line-height: 1.7;
+  }
+  .faq-qmark {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 7px;
+    background: var(--brand); color: var(--on-brand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: calc(.75rem + 1px); font-weight: 800; margin-top: 1px;
+  }
+  .faq-amark {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 7px;
+    background: var(--surface-alt); border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: calc(.75rem + 1px); font-weight: 800; margin-top: 1px; color: var(--text-mid);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════════════ */
+  .footer-btns {
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+    max-width: 1080px; margin: 8px auto 0; padding: 8px 18px 0;
+  }
+  .footer-btn {
+    min-width: 200px; max-width: 360px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--navy); color: #ffd43b;
+    font-family: 'Poppins', sans-serif; font-size: calc(1rem + 1px); font-weight: 700;
+    padding: 16px 30px; border-radius: 50px; text-decoration: none; border: none;
+    box-shadow: 0 4px 18px rgba(34,72,124,.3); transition: transform .15s, box-shadow .15s;
+  }
+  .footer-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,72,124,.45); }
+  [data-theme="dark"] .footer-btn { background: #2c5a96; box-shadow: 0 4px 18px rgba(0,0,0,.4); }
+
+  footer {
+    background: var(--dark-bg); color: rgba(255,255,255,.5);
+    text-align: center; padding: 36px 24px 44px; margin-top: 36px;
+    font-size: calc(.88rem + 1px); line-height: 2;
+  }
+  footer .brand { font-size: calc(.95rem + 1px); font-weight: 700; color: var(--highlight); margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Theme toggle -->
+<div id="theme-switch" role="group" aria-label="Toggle dark/light mode">
+  <button class="theme-opt" id="theme-opt-dark">🌙 Dark</button>
+  <button class="theme-opt" id="theme-opt-light">☀️ Light</button>
+</div>
+
+<!-- Back to top -->
+<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════ -->
+<header class="header">
+  <div class="header-inner">
+    <span class="event-badge">Vertex Mastery</span>
+    <img src="Winning%202027%20Logo.png" alt="Winning 2027: Visit Edition logo" class="event-logo">
+    <h1 class="event-name">Winning 2027: <span>Visit Edition</span></h1>
+    <p class="tagline">SEE THE MODEL . FIND THE GAP . MAKE THE MOVE</p>
+    <div class="header-rule"></div>
+    <div class="header-meta">
+      <div class="meta-pill">📅&nbsp;<strong>31st Oct – 1st Nov 2026</strong>&nbsp;·&nbsp;<span>Sat – Sun</span></div>
+      <div class="meta-pill">🕙&nbsp;<strong>Day 1 starts 9.00am</strong></div>
+      <div class="meta-pill">📍&nbsp;<strong>Menara EcoWorld, KL</strong></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     COUNTDOWN
+═══════════════════════════════════════════════════ -->
+<div class="countdown-wrap">
+  <div class="countdown-label">Winning 2027 Starts In</div>
+  <div id="countdown" class="countdown-boxes">
+    <div class="cd-group">
+      <div class="cd-tiles"><span class="cd-digit" id="cd-days-0">0</span><span class="cd-digit" id="cd-days-1">0</span></div>
+      <span class="cd-unit-label">Days</span>
+    </div>
+    <span class="cd-colon">:</span>
+    <div class="cd-group">
+      <div class="cd-tiles"><span class="cd-digit" id="cd-hours-0">0</span><span class="cd-digit" id="cd-hours-1">0</span></div>
+      <span class="cd-unit-label">Hours</span>
+    </div>
+    <span class="cd-colon">:</span>
+    <div class="cd-group">
+      <div class="cd-tiles"><span class="cd-digit" id="cd-mins-0">0</span><span class="cd-digit" id="cd-mins-1">0</span></div>
+      <span class="cd-unit-label">Mins</span>
+    </div>
+    <span class="cd-colon">:</span>
+    <div class="cd-group">
+      <div class="cd-tiles"><span class="cd-digit" id="cd-secs-0">0</span><span class="cd-digit" id="cd-secs-1">0</span></div>
+      <span class="cd-unit-label">Secs</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     LAYOUT — SIDEBAR + MAIN
+═══════════════════════════════════════════════════ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+   <div class="sidebar-inner">
+
+    <!-- 1. Logo + Date & Time -->
+    <div class="sidebar-card sidebar-meta">
+      <img src="Sidebar%20Logo%20Blue.png" alt="Winning 2027 logo" class="sm-logo" id="sm-logo-img">
+      <div class="sm-divider"></div>
+      <div class="sm-col">
+        <span class="sm-date">31<sup>st</sup> Oct – 1<sup>st</sup> Nov 2026</span>
+        <span class="sm-days">Sat – Sun</span>
+        <div class="sm-times">
+          <span class="sm-time"><span>Day 1</span>9.00am – 9.00pm</span>
+          <span class="sm-time"><span>Day 2</span>10.00am – 7.00pm</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Mini countdown -->
+    <div class="sidebar-info">
+      <div class="sidebar-cd-label">Winning 2027 Starts In</div>
+      <div class="sidebar-countdown-mini" id="sidebar-countdown">
+        <div class="sidebar-cd-grid">
+          <div class="mcd-group">
+            <div class="mcd-tiles"><span class="mcd-digit" id="mcd-days-0">0</span><span class="mcd-digit" id="mcd-days-1">0</span></div>
+            <span class="mcd-label">Days</span>
+          </div>
+          <div class="mcd-group">
+            <div class="mcd-tiles"><span class="mcd-digit" id="mcd-hours-0">0</span><span class="mcd-digit" id="mcd-hours-1">0</span></div>
+            <span class="mcd-label">Hours</span>
+          </div>
+          <div class="mcd-group">
+            <div class="mcd-tiles"><span class="mcd-digit" id="mcd-mins-0">0</span><span class="mcd-digit" id="mcd-mins-1">0</span></div>
+            <span class="mcd-label">Mins</span>
+          </div>
+          <div class="mcd-group">
+            <div class="mcd-tiles"><span class="mcd-digit" id="mcd-secs-0">0</span><span class="mcd-digit" id="mcd-secs-1">0</span></div>
+            <span class="mcd-label">Secs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Navigation -->
+    <nav class="sidebar-card sidebar-nav" aria-label="Jump to section">
+      <div class="sidebar-title">Jump to</div>
+      <div class="sidebar-nav-links">
+        <a href="#event-details" class="sidebar-link" data-target="event-details"><span class="sidebar-bar"></span><span class="sidebar-icon">📋</span> Event Details</a>
+        <a href="#venue-guide" class="sidebar-link" data-target="venue-guide"><span class="sidebar-bar"></span><span class="sidebar-icon">🏢</span> Venue Guide</a>
+        <a href="#what-to-prepare" class="sidebar-link" data-target="what-to-prepare"><span class="sidebar-bar"></span><span class="sidebar-icon">🎒</span> What to Prepare</a>
+        <a href="#recommended-accommodation" class="sidebar-link" data-target="recommended-accommodation"><span class="sidebar-bar"></span><span class="sidebar-icon">🏨</span> Recommended Accommodation</a>
+        <a href="#onboarding-form" class="sidebar-link" data-target="onboarding-form"><span class="sidebar-bar"></span><span class="sidebar-icon">📝</span> Onboarding Form</a>
+        <a href="#dress-code" class="sidebar-link" data-target="dress-code"><span class="sidebar-bar"></span><span class="sidebar-icon">👔</span> Dress Code</a>
+        <a href="#agenda" class="sidebar-link" data-target="agenda"><span class="sidebar-bar"></span><span class="sidebar-icon">🗓️</span> Agenda</a>
+        <a href="#faq" class="sidebar-link" data-target="faq"><span class="sidebar-bar"></span><span class="sidebar-icon">❓</span> FAQ</a>
+      </div>
+    </nav>
+
+   </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ── 1. EVENT DETAILS ─────────────────────────────── -->
+    <div class="acc-item" id="event-details">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-event">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">📋</div>
+        <h2 class="sec-title">Event Details</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-event" role="region">
+        <div class="acc-content">
+          <div class="info-row">
+            <span class="ilabel">Venue</span>
+            <div class="ivalue">
+              <strong>Vertex Mastery Sdn Bhd</strong><br>
+              <span>39-08, Menara EcoWorld @ BBCC,<br>2, Jln Hang Tuah, Bukit Bintang,<br>55100 Kuala Lumpur</span>
+              <div class="map-btns">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Vertex+Mastery+Sdn+Bhd+39-08+Menara+Ecoworld+BBCC+2+Jln+Hang+Tuah+Bukit+Bintang+55100+Kuala+Lumpur" target="_blank" rel="noopener noreferrer" class="btn btn-solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0;vertical-align:middle"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#EA4335"/></svg>&nbsp; Google Maps</a>
+                <a href="https://waze.com/ul/hw283f7wb2" target="_blank" rel="noopener noreferrer" class="btn btn-solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0;vertical-align:middle"><path d="M12 2C7 2 3 6.1 3 11c0 3.1 1.6 5.9 4 7.5l.6 2.5h8.8l.6-2.5c2.4-1.6 4-4.4 4-7.5 0-4.9-4-9-9-9z" fill="#33CCFF"/><circle cx="9.2" cy="10.2" r="1.4" fill="white"/><circle cx="14.8" cy="10.2" r="1.4" fill="white"/><circle cx="9.7" cy="10.7" r="0.7" fill="#1a4a6b"/><circle cx="15.3" cy="10.7" r="0.7" fill="#1a4a6b"/><path d="M9 13.8 Q12 16.2 15 13.8" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>&nbsp; Waze</a>
+              </div>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="ilabel">Date</span>
+            <div class="ivalue"><strong>31st Oct – 1st Nov 2026</strong><br><span style="font-size: calc(.88rem + 1px);"><em>Saturday to Sunday</em></span></div>
+          </div>
+          <div class="info-row">
+            <span class="ilabel">Time</span>
+            <div class="ivalue">
+              <div class="day-times">
+                <div class="day-time">
+                  <span class="day-label">Day 1 · Sat, 31 Oct</span>
+                  Registration Time: <strong>8.30am</strong><br>
+                  Event Time: <strong>9.00am – 9.00pm</strong>
+                </div>
+                <div class="day-time">
+                  <span class="day-label">Day 2 · Sun, 1 Nov</span>
+                  Registration Time: <strong>9.30am</strong><br>
+                  Event Time: <strong>10.00am – 7.00pm</strong>
+                </div>
+              </div>
+              <div class="inote">End time may vary depending on the day's agenda.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2. VENUE GUIDE ───────────────────────────────── -->
+    <div class="acc-item" id="venue-guide">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-venue">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">🏢</div>
+        <h2 class="sec-title">Venue Guide</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-venue" role="region">
+        <div class="acc-content">
+          <div class="subsec">
+            <div class="subsec-title">If You Are Taking Grab</div>
+            <p style="margin-top:4px;font-size: calc(.97rem + 1px);color:var(--text-mid);">Drop-off Point: <strong style="color:var(--text);">Menara EcoWorld</strong></p>
+          </div>
+          <div class="subsec">
+            <div class="subsec-title">If You Are Driving</div>
+            <p style="font-size: calc(.8rem + 1px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;padding-left:2px;">Parking Options</p>
+            <div class="park-grid">
+
+              <div class="park-card">
+                <div class="park-head"><div class="park-opt">Option 1</div><div class="park-name">Lalaport BBCC</div></div>
+                <div class="park-body">
+                  <div class="park-detail">
+                    <div class="park-dlabel">How to Park</div>
+                    <div class="park-dval">Park at <strong>Zone D (Pink Zone)</strong>, Pillars <strong>D1 – D4</strong></div>
+                    <img src="Car%20Park%20Guide.jpg" alt="Lalaport BBCC Zone D (Pink Zone) parking pillar" class="park-img" style="object-position:center 40%;" loading="lazy">
+                    <img src="Carpark%20D5.png" alt="Lalaport BBCC Zone D lift lobby entrance" class="park-img" loading="lazy">
+                  </div>
+                  <div class="park-detail">
+                    <div class="park-dlabel">Rates</div>
+                    <div class="park-rates">
+                      <div class="rate-row"><span class="rate-dot">•</span><span>First 3 hours: <strong>RM 2</strong></span></div>
+                      <div class="rate-row"><span class="rate-dot">•</span><span>Subsequent hour: <strong>RM 2</strong></span></div>
+                      <div class="rate-row"><span class="rate-dot">•</span><span>After 5:00 PM: <strong>Free</strong></span></div>
+                      <div class="rate-row"><span class="rate-dot">•</span><span>Max per day: <strong>RM 24</strong></span></div>
+                    </div>
+                  </div>
+                  <div class="park-detail"><a href="https://drive.google.com/file/d/16bEdjv1krMEIJmvI55AtLGKH5cOWUm4v/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-solid" style="font-size: calc(.86rem + 1px);padding:9px 15px;align-self:flex-start;">▶&nbsp; Directory Video</a></div>
+                </div>
+              </div>
+
+              <div class="park-card">
+                <div class="park-head"><div class="park-opt">Option 2</div><div class="park-name">The Labs @ BBCC</div></div>
+                <div class="park-body">
+                  <div class="park-detail">
+                    <div class="park-dlabel">How to Park</div>
+                    <div class="park-dval">Park at <strong>B3</strong>, near <strong>Lift A</strong></div>
+                    <img src="The%20Lab%20Parking.png" alt="The Labs @ BBCC car park entrance" class="park-img" loading="lazy">
+                    <img src="The%20Lab.png" alt="The Labs @ BBCC level B3 near Lift A" class="park-img" loading="lazy">
+                  </div>
+                  <div class="park-detail">
+                    <div class="park-dlabel">Rates</div>
+                    <div class="park-rates">
+                      <div class="rate-row"><span class="rate-dot">•</span><span>First hour: <strong>RM 3</strong></span></div>
+                      <div class="rate-row"><span class="rate-dot">•</span><span>Subsequent hour: <strong>RM 2</strong></span></div>
+                      <div class="rate-row"><span class="rate-dot">•</span><span>Max per day: <strong>RM 40</strong></span></div>
+                    </div>
+                  </div>
+                  <div class="park-detail"><a href="https://drive.google.com/file/d/1oMJFtL8d2HX7w0G1q9xJnEQnNaeUMid6/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-solid" style="font-size: calc(.86rem + 1px);padding:9px 15px;align-self:flex-start;">▶&nbsp; Directory Video</a></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="subsec">
+            <div class="subsec-title">When You Arrive At The Venue</div>
+            <div class="lobby-box">We've pre-registered all of you ✅<br><br>When you arrive, just head to the lobby reception and let security personnel know you are here for the event at Level 3️⃣9️⃣.<br><br>They will take care and guide you the next step.</div>
+          </div>
+          <div class="subsec">
+            <div class="subsec-title">Venue Lobby</div>
+            <div class="photo-wrap" style="margin-top:8px;">
+              <img src="Ecoworld%20Lobby.jpg" alt="Menara EcoWorld lobby reception" class="venue-photo" loading="lazy">
+              <p class="photo-caption">Head to the reception counter upon arrival</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. WHAT TO PREPARE ───────────────────────────── -->
+    <div class="acc-item" id="what-to-prepare">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-prep">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">🎒</div>
+        <h2 class="sec-title">What to Prepare</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-prep" role="region">
+        <div class="acc-content">
+          <div class="subsec">
+            <div class="subsec-title">Data to Prepare for the Goal Setting Session (Action Needed)</div>
+            <p class="prep-intro">Prepare your metrics <em>(for the past 3 years, broken down into months)</em>:</p>
+            <div class="hw-box">
+              <div class="hw-item"><span class="icon">🧲</span><span class="body">Leads</span></div>
+              <div class="hw-item"><span class="icon">💰</span><span class="body">Revenue</span></div>
+              <div class="hw-item"><span class="icon">🧾</span><span class="body">Sales Amount</span></div>
+              <div class="hw-item"><span class="icon">📈</span><span class="body">Profit Margin</span></div>
+              <div class="hw-item"><span class="icon">🏦</span><span class="body">Cash Reserve</span></div>
+            </div>
+            <div class="prep-note"><span class="icon">📌</span><span><strong>No submission needed.</strong> Simply have a softcopy ready (and a printed copy, if you prefer) to refer to during our Winning 2027 Goal Setting Session.</span></div>
+          </div>
+          <div class="subsec">
+            <div class="subsec-title">Items to Bring</div>
+            <div class="hw-box">
+              <div class="hw-item"><span class="icon">💧</span><span class="body">Water Bottle with Lid</span></div>
+              <div class="hw-item"><span class="icon">📓</span><span class="body">Notebook with Pen</span></div>
+              <div class="hw-item"><span class="icon">🔋</span><span class="body">Power Bank or Charger</span></div>
+              <div class="hw-item"><span class="icon">🧥</span><span class="body">Jacket <em>(Highly recommended!)</em></span></div>
+              <div class="hw-item"><span class="icon">🪪</span><span class="body">Name Cards to exchange with your fellow classmates</span></div>
+            </div>
+          </div>
+          <div class="subsec">
+            <div class="subsec-title">Especially for Foreign Participants</div>
+            <div class="hw-box">
+              <div class="hw-item"><span class="icon">🛂</span><span class="body">Passport</span></div>
+              <div class="hw-item"><span class="icon">💵</span><span class="body">Cash</span></div>
+              <div class="hw-item"><span class="icon">🔌</span><span class="body">Travel Adaptor</span></div>
+              <div class="hw-item"><span class="icon">🧳</span><span class="body">Other Travel Essentials</span></div>
+              <div class="hw-item"><span class="icon">👕</span><span class="body">Fresh Clothes to Change</span></div>
+              <div class="hw-item"><span class="icon">👟</span><span class="body">Comfortable Shoes</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. RECOMMENDED ACCOMMODATION ─────────────────── -->
+    <div class="acc-item" id="recommended-accommodation">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-accommodation">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">🏨</div>
+        <h2 class="sec-title">Recommended Accommodation</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-accommodation" role="region">
+        <div class="acc-content">
+          <div class="onboard-box">
+            <p>If you are looking for accommodation near the venue, here are our top recommended stays located within close proximity:</p>
+            <a href="https://drive.google.com/file/d/1DdUfsQvKl6UjtH5rxuD22gufASgkXRa2/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary">🏨&nbsp; View Recommended Stays (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. ONBOARDING FORM ───────────────────────────── -->
+    <div class="acc-item" id="onboarding-form">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-onboarding">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">📝</div>
+        <h2 class="sec-title">Event Onboarding Form (Action Needed)</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-onboarding" role="region">
+        <div class="acc-content">
+          <div class="onboard-box">
+            <p>If you haven't filled in and submitted your onboarding form yet, please take 3 minutes to complete it here. This helps our team get everything ready for you — from finalizing your corporate visit passes to taking care of your dietary arrangements and event logistics!</p>
+            <!-- TODO: form link pending — set href and remove onclick once available -->
+            <a href="#" onclick="return false;" class="btn btn-primary btn-pulse">📝&nbsp; Fill in Onboarding Form</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. DRESS CODE ─────────────────────────────────── -->
+    <div class="acc-item" id="dress-code">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-dress">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">👔</div>
+        <h2 class="sec-title">Dress Code</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-dress" role="region">
+        <div class="acc-content">
+          <div class="dress-badge">
+            <span class="dress-icon">👔</span>
+            <span><strong>Smart Casual</strong><br><span>Bring a jacket along as the room will be cold.</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. AGENDA (placeholder until agenda is confirmed) ── -->
+    <div class="acc-item" id="agenda">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-agenda">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">🗓️</div>
+        <h2 class="sec-title">Agenda</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-agenda" role="region">
+        <div class="acc-content">
+          <div class="agenda-day">
+            <div class="agenda-head"><span class="agenda-day-label">Day 1</span><span class="agenda-date">Saturday, 31 Oct 2026</span></div>
+            <ol class="agenda-list">
+              <li class="agenda-step"><span class="agenda-time">8.30am</span><strong>Registration</strong></li>
+              <li class="agenda-step"><span class="agenda-time">9.00am</span><strong>Door Open</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Opening Session</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Emcee Introduces SME Funding-i</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>SME Funding-i Sharing Session</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Lunch</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Debrief for Morning Session</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Breakthrough Activity: Self Praise Game</strong></li>
+              <li class="agenda-step"><span class="agenda-time">9.00pm</span><strong>End of the Day</strong></li>
+            </ol>
+          </div>
+          <div class="agenda-day">
+            <div class="agenda-head"><span class="agenda-day-label">Day 2</span><span class="agenda-date">Sunday, 1 Nov 2026</span></div>
+            <ol class="agenda-list">
+              <li class="agenda-step"><span class="agenda-time">9.30am</span><strong>Registration</strong></li>
+              <li class="agenda-step"><span class="agenda-time">10.00am</span><strong>Door Open</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Opening Session</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>2027 Goal Setting</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Lunch</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Mastermind Session</strong></li>
+              <li class="agenda-step"><span class="agenda-time"></span><strong>Winning 2027 Wrap Up</strong></li>
+              <li class="agenda-step"><span class="agenda-time">7.00pm</span><strong>End of the Day</strong></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. FAQ ────────────────────────────────────────── -->
+    <div class="acc-item" id="faq">
+      <button class="acc-toggle" aria-expanded="false" aria-controls="body-faq">
+        <span class="acc-bar"></span>
+        <div class="sec-icon">❓</div>
+        <h2 class="sec-title">FAQ</h2>
+        <span class="acc-chevron">▼</span>
+      </button>
+      <div class="acc-body" id="body-faq" role="region">
+        <div class="acc-content">
+          <div class="faq-item">
+            <div class="faq-q"><span class="faq-qmark">Q</span><span>Can I transfer my ticket to someone else?</span></div>
+            <div class="faq-a"><span class="faq-amark">A</span><span>Yes. Tickets are non-refundable but transferable within the same company. Just inform us <strong>5 working days</strong> before the workshop so we can update your attendee information.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><span class="faq-qmark">Q</span><span>Is there any translation service?</span></div>
+            <div class="faq-a"><span class="faq-amark">A</span><span>The workshop will be conducted entirely in English, and no translation will be provided.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><span class="faq-qmark">Q</span><span>Is the workshop HRDC Claimable?</span></div>
+            <div class="faq-a"><span class="faq-amark">A</span><span>Yes. Winning 2027 is HRD Corp claimable under the HRD Corp training schemes, subject to your company's eligibility and levy balance.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER BUTTONS
+     TODO: replace the WhatsApp Group "#" href once the link is confirmed
+═══════════════════════════════════════════════════ -->
+<div class="footer-btns">
+  <a href="https://wa.me/60122948653" target="_blank" rel="noopener noreferrer" class="footer-btn">📞&nbsp; Contact Us</a>
+  <a href="#" target="_blank" rel="noopener noreferrer" class="footer-btn">💬&nbsp; Join WhatsApp Group</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+  <p class="brand">Vertex Mastery Sdn Bhd</p>
+  <p>Copyright 2026. All Rights Reserved, Vertex Mastery Sdn Bhd.</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════ -->
+<script>
+  /* ── COUNTDOWN — Day 1 event start, Malaysia time ── */
+  var EVENT_DATE = new Date('2026-10-31T08:30:00+08:00');
+  var DONE_MSG = '<p class="countdown-done">This event has started — we\'ll see you there! 🎉</p>';
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function setDigits(prefix, value) {
+    var str = pad(value);
+    var el0 = document.getElementById(prefix + '-0');
+    var el1 = document.getElementById(prefix + '-1');
+    if (el0) el0.textContent = str.charAt(str.length - 2);
+    if (el1) el1.textContent = str.charAt(str.length - 1);
+  }
+
+  var tickInterval;
+  function tick() {
+    var diff = EVENT_DATE - Date.now();
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = DONE_MSG;
+      document.getElementById('sidebar-countdown').innerHTML = DONE_MSG;
+      clearInterval(tickInterval);
+      return;
+    }
+    var days  = Math.floor(diff / 864e5);
+    var hours = Math.floor((diff % 864e5) / 36e5);
+    var mins  = Math.floor((diff % 36e5) / 6e4);
+    var secs  = Math.floor((diff % 6e4) / 1e3);
+
+    setDigits('cd-days', days);   setDigits('mcd-days', days);
+    setDigits('cd-hours', hours); setDigits('mcd-hours', hours);
+    setDigits('cd-mins', mins);   setDigits('mcd-mins', mins);
+    setDigits('cd-secs', secs);   setDigits('mcd-secs', secs);
+  }
+  tick();
+  tickInterval = setInterval(tick, 1000);
+
+  /* ── ACCORDION ─────────────────────────────────────── */
+  function openAccordion(item) {
+    var body = item.querySelector('.acc-body');
+    var toggle = item.querySelector('.acc-toggle');
+    if (item.classList.contains('is-open')) return;
+    item.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    body.addEventListener('transitionend', function onEnd() {
+      if (item.classList.contains('is-open')) body.style.maxHeight = 'none';
+      body.removeEventListener('transitionend', onEnd);
+    });
+  }
+
+  document.querySelectorAll('.acc-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      var item = this.closest('.acc-item');
+      var body = item.querySelector('.acc-body');
+      if (item.classList.contains('is-open')) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { body.style.maxHeight = '0'; });
+        });
+        item.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      } else {
+        openAccordion(item);
+      }
+    });
+  });
+
+  /* ── DARK / LIGHT THEME TOGGLE ─────────────────────── */
+  (function() {
+    var html = document.documentElement;
+    var optDark = document.getElementById('theme-opt-dark');
+    var optLight = document.getElementById('theme-opt-light');
+    var STORAGE_KEY = 'vm-winning2027-theme';
+
+    function applyTheme(theme, persist) {
+      html.setAttribute('data-theme', theme);
+      optDark.classList.toggle('active', theme === 'dark');
+      optLight.classList.toggle('active', theme === 'light');
+      if (persist) { try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {} }
+      document.getElementById('sm-logo-img').src = (theme === 'dark') ? 'Sidebar%20Logo%20White.png' : 'Sidebar%20Logo%20Blue.png';
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    var system = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    applyTheme(saved || system, false);
+
+    optDark.addEventListener('click', function() { applyTheme('dark', true); });
+    optLight.addEventListener('click', function() { applyTheme('light', true); });
+  })();
+
+  /* ── SIDEBAR SCROLL-SPY + SMOOTH SCROLL ───────────── */
+  (function() {
+    var links = document.querySelectorAll('.sidebar-link');
+    function setActiveLink(id) {
+      links.forEach(function(link) { link.classList.toggle('active', link.dataset.target === id); });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) setActiveLink(entry.target.id); });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    document.querySelectorAll('.acc-item').forEach(function(sec) { observer.observe(sec); });
+
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.target);
+        if (!target) return;
+        openAccordion(target);
+        setActiveLink(this.dataset.target);
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  /* ── BACK TO TOP ─────────────────────────────────── */
+  (function() {
+    var backBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+      backBtn.classList.toggle('show', window.scrollY > 400);
+    });
+    backBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  /* ── MOBILE STICKY NAV DOCK ─────────────────────────
+     Below 900px the pill nav switches to position:fixed once it would scroll
+     off the top (a spacer keeps the layout from jumping), and back again when
+     scrolled up past its original spot. */
+  (function() {
+    var mobileNav = document.querySelector('.sidebar-nav');
+    var spacer = document.createElement('div');
+    spacer.className = 'sidebar-nav-spacer';
+    spacer.style.height = '0px';
+    mobileNav.parentNode.insertBefore(spacer, mobileNav);
+
+    function updateDock() {
+      if (window.innerWidth > 900) {
+        if (mobileNav.classList.contains('is-docked')) {
+          mobileNav.classList.remove('is-docked');
+          spacer.style.height = '0px';
+        }
+        return;
+      }
+      if (!mobileNav.classList.contains('is-docked')) {
+        if (mobileNav.getBoundingClientRect().top <= 0) {
+          spacer.style.height = mobileNav.offsetHeight + 'px';
+          mobileNav.classList.add('is-docked');
+        }
+      } else if (spacer.getBoundingClientRect().top > 0) {
+        mobileNav.classList.remove('is-docked');
+        spacer.style.height = '0px';
+      }
+    }
+    window.addEventListener('scroll', updateDock);
+    window.addEventListener('resize', updateDock);
+    updateDock();
+  })();
+</script>
+
+</body>
+</html>
