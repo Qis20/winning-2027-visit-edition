@@ -692,51 +692,6 @@
   .onboard-box p { font-size: calc(.97rem + 1px); color: var(--text-mid); line-height: 1.7; margin-bottom: 22px; }
 
   /* ═══════════════════════════════════════════════════
-     AGENDA
-  ═══════════════════════════════════════════════════ */
-  .agenda-day {
-    border: 2px solid var(--border); border-radius: 14px;
-    overflow: hidden; margin-bottom: 12px;
-  }
-  .agenda-day:last-child { margin-bottom: 0; }
-  .agenda-head {
-    background: var(--surface-alt); padding: 13px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
-  }
-  .agenda-day-label {
-    font-size: calc(.76rem + 1px); font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--brand-dark);
-  }
-  .agenda-date { font-size: calc(.95rem + 1px); font-weight: 700; }
-  .agenda-body { padding: 14px 18px; font-size: calc(.9rem + 1px); color: var(--text-light); font-style: italic; }
-
-  /* Day timeline: dot + connecting line, optional time on the left */
-  .agenda-list { list-style: none; padding: 16px 18px 18px; }
-  .agenda-step {
-    position: relative;
-    display: flex; gap: 14px; align-items: flex-start;
-    padding: 0 0 14px 22px;
-    font-size: calc(.98rem + 1px); line-height: 1.6; color: var(--text-mid);
-  }
-  .agenda-step:last-child { padding-bottom: 0; }
-  .agenda-step::before {
-    content: ''; position: absolute; left: 0; top: 6px;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--brand); box-shadow: 0 0 0 3px var(--brand-xlight);
-  }
-  .agenda-step::after {
-    content: ''; position: absolute; left: 4px; top: 20px; bottom: 2px;
-    width: 2px; background: var(--border);
-  }
-  .agenda-step:last-child::after { display: none; }
-  .agenda-time {
-    flex-shrink: 0; min-width: 62px;
-    font-weight: 700; color: var(--brand-dark); font-size: calc(.9rem + 1px);
-  }
-  .agenda-step strong { color: var(--text); font-weight: 600; }
-
-  /* ═══════════════════════════════════════════════════
      DRESS CODE
   ═══════════════════════════════════════════════════ */
   .dress-badge {
@@ -922,7 +877,6 @@
         <a href="#recommended-accommodation" class="sidebar-link" data-target="recommended-accommodation"><span class="sidebar-bar"></span><span class="sidebar-icon">🏨</span> Recommended Accommodation</a>
         <a href="#onboarding-form" class="sidebar-link" data-target="onboarding-form"><span class="sidebar-bar"></span><span class="sidebar-icon">📝</span> Onboarding Form</a>
         <a href="#dress-code" class="sidebar-link" data-target="dress-code"><span class="sidebar-bar"></span><span class="sidebar-icon">👔</span> Dress Code</a>
-        <a href="#agenda" class="sidebar-link" data-target="agenda"><span class="sidebar-bar"></span><span class="sidebar-icon">🗓️</span> Agenda</a>
         <a href="#faq" class="sidebar-link" data-target="faq"><span class="sidebar-bar"></span><span class="sidebar-icon">❓</span> FAQ</a>
       </div>
     </nav>
@@ -1155,47 +1109,6 @@
           <div class="dress-badge">
             <span class="dress-icon">👔</span>
             <span><strong>Smart Casual</strong><br><span>Bring a jacket along as the room will be cold.</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── 7. AGENDA (placeholder until agenda is confirmed) ── -->
-    <div class="acc-item" id="agenda">
-      <button class="acc-toggle" aria-expanded="false" aria-controls="body-agenda">
-        <span class="acc-bar"></span>
-        <div class="sec-icon">🗓️</div>
-        <h2 class="sec-title">Agenda</h2>
-        <span class="acc-chevron">▼</span>
-      </button>
-      <div class="acc-body" id="body-agenda" role="region">
-        <div class="acc-content">
-          <div class="agenda-day">
-            <div class="agenda-head"><span class="agenda-day-label">Day 1</span><span class="agenda-date">Saturday, 31 Oct 2026</span></div>
-            <ol class="agenda-list">
-              <li class="agenda-step"><span class="agenda-time">8.30am</span><strong>Registration</strong></li>
-              <li class="agenda-step"><span class="agenda-time">9.00am</span><strong>Door Open</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Opening Session</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Emcee Introduces SME Funding-i</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>SME Funding-i Sharing Session</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Lunch</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Debrief for Morning Session</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Breakthrough Activity: Self Praise Game</strong></li>
-              <li class="agenda-step"><span class="agenda-time">9.00pm</span><strong>End of the Day</strong></li>
-            </ol>
-          </div>
-          <div class="agenda-day">
-            <div class="agenda-head"><span class="agenda-day-label">Day 2</span><span class="agenda-date">Sunday, 1 Nov 2026</span></div>
-            <ol class="agenda-list">
-              <li class="agenda-step"><span class="agenda-time">9.30am</span><strong>Registration</strong></li>
-              <li class="agenda-step"><span class="agenda-time">10.00am</span><strong>Door Open</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Opening Session</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>2027 Goal Setting</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Lunch</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Mastermind Session</strong></li>
-              <li class="agenda-step"><span class="agenda-time"></span><strong>Winning 2027 Wrap Up</strong></li>
-              <li class="agenda-step"><span class="agenda-time">7.00pm</span><strong>End of the Day</strong></li>
-            </ol>
           </div>
         </div>
       </div>
